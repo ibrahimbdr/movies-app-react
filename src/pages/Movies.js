@@ -4,8 +4,29 @@ import { BsSearch } from 'react-icons/bs';
 import { useState, useEffect, useSearchParams } from 'react';
 import axiosInstance from '../axios config/axiosInstance';
 import { FaStar } from 'react-icons/fa';
+import { FcLike, FcLikePlaceholder } from 'react-icons/fc';
+import { useDispatch, useSelector } from 'react-redux';
+import { addFavMovies } from '../store/actions/movies';
+
 
 export const Movies = () => {
+    const fav_movies = useSelector((state)=>state.favMovies);
+    const dispatch = useDispatch();
+    const [like, setLike] = useState(false)
+    function handleLikeBtn (data) {
+
+        if(fav_movies.includes(data)) {
+            const newList = fav_movies.filter(mov => {
+                return mov != data;
+            })
+            dispatch(addFavMovies([...newList]));
+            setLike(false)
+        }else{
+            dispatch(addFavMovies([...fav_movies,data]));
+            setLike(true)
+        }
+        console.log(fav_movies);
+    }
     let [query, setQuery]= useState(document.location.search.split('=')[1]);
     const [films, setFilms] = useState([])
     let [page, setPage] = useState(1)
@@ -13,8 +34,14 @@ export const Movies = () => {
         if(query){
             axiosInstance.get(`/search/movie?api_key=cd5cc4af3750ab19c216b0a7f80654a9&query=${query}`)
             .then((res) => {
+            // let movieList = res.data.results;
+            // movieList.forEach(list => {
+
+            //     list.liked = false;
+            // })
+            //dispatch the date into the store
             setFilms(res.data.results)
-            console.log(films);
+            // console.log(films);
             // console.log(searchParams);
         }).catch((err) => {
             console.log(err);
@@ -22,8 +49,14 @@ export const Movies = () => {
         }else{
             axiosInstance.get(`/movie/popular?api_key=cd5cc4af3750ab19c216b0a7f80654a9&page=${page}`)
             .then((res) => {
+            let movieList = res.data.results;
+            movieList.forEach(list => {
+                list.liked = false;
+            })
+            dispatch(addFavMovies(movieList));
+            console.log(movieList);
             setFilms(res.data.results)
-            console.log(films);
+            // console.log(films);
             // console.log(searchParams);
         }).catch((err) => {
             console.log(err);
@@ -56,8 +89,9 @@ export const Movies = () => {
             <nav className='flex justify-between p-2 bg-slate-800 bg-opacity-60 sticky'>
                 <div className='leftNav flex items-center'>
                     <span className='font-Roboto text-3xl text-stone-500 font-bold'><Link to='/'>MoviesLand</Link></span>
-                    <ul className='ml-5 text-lg font-Roboto text-slate-400 font-semibold'>
+                    <ul className='ml-5 text-lg font-Roboto text-slate-400 font-semibold flex'>
                         <li><Link to='/movies'>Movies</Link></li>
+                        <li className='ml-3'><Link to='/favmovies'>Favorite Movies</Link></li>
                     </ul>
                 </div>
                 <div className='flex items-center'>
@@ -82,7 +116,7 @@ export const Movies = () => {
                         </Link>
                         <div className='flex justify-between bg-stone-400 mr-8 p-3'>
                         <h5 className='font-normal text-sm'>{film.title}</h5>
-                        <h6 className='font text-sm font-extrabold flex items-center'><FaStar className='text-amber-400 mr-1'/>{film.vote_average}</h6>
+                        <h6 className='font text-sm font-extrabold flex items-center'><button className='mr-1' onClick={(film)=>{handleLikeBtn(film)}}>{like?<FcLike/>:<FcLikePlaceholder/>}</button><FaStar className='text-amber-400 mr-1'/>{film.vote_average}</h6>
                         </div>
                     </div>
                 )

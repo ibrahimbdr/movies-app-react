@@ -1,7 +1,8 @@
-import { Home } from "./components/Home";
+import { Home } from "./pages/Home";
 import { Footer } from "./components/Footer";
-import { Movies } from "./components/Movies";
-import { MovieInfo } from "./components/MovieInfo";
+import { Movies } from "./pages/Movies";
+import { MovieInfo } from "./pages/MovieInfo";
+import { FavMovies } from "./pages/FavMovies";
 import { useState } from "react";
 import { 
       BrowserRouter as Router,
@@ -10,7 +11,7 @@ import {
       Redirect,
       useHistory
 } from 'react-router-dom';
-import { Login } from "./components/Login";
+import { Login } from "./pages/Login";
 
 function App() {
   const goto = useHistory()
@@ -32,6 +33,7 @@ function App() {
           <Route path='/' exact component={Home} />
           <Route path='/movies' exact component={Movies} />
           <Route path='/movies/:id' exact component={MovieInfo} />
+          <Route path='/favmovies' exact component={FavMovies} />
           <Route path='/login' exact component={Login} />
           <Route path="*" element={<p>There's nothing here: 404!</p>} />
         </Switch>
