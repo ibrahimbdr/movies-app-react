@@ -12,9 +12,9 @@ export const Home = () => {
                         <li><Link to='/movies'>Movies</Link></li>
                     </ul>
                 </div>
-                <span>
-                    <button className='font-Roboto text-md text-stone-800 font-semibold bg-slate-300 hover:text-stone-400 transition-all px-4 py-2 rounded-md mr-2'>Sign In</button>
-                    <button className='font-Roboto text-md text-slate-50 font-semibold bg-stone-600 hover:bg-stone-400 transition-all px-4 py-2 rounded-md'>Sign Up</button>
+                <span className='flex items-center'>
+                    <Link to="/login" className='font-Roboto text-md text-stone-800 font-semibold bg-slate-300 hover:text-stone-400 transition-all px-4 py-2 rounded-md mr-2'>Sign In</Link>
+                    <Link className='font-Roboto text-md text-slate-50 font-semibold bg-stone-600 hover:bg-stone-400 transition-all px-4 py-2 rounded-md'>Sign Up</Link>
                 </span>
             </nav>
         </div>
