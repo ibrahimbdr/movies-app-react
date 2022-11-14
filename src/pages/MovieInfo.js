@@ -19,7 +19,7 @@ export const MovieInfo = () => {
 
   return (
     <div>
-        <div className=' bg-stone-500 bg-cover'>
+        <div className=' bg-stone-500 bg-cover' key={filmInfo.id}>
             <nav className='flex justify-between p-2 bg-slate-800 bg-opacity-60 sticky'>
                 <div className='leftNav flex items-center'>
                     <span className='font-Roboto text-3xl text-stone-500 font-bold'><Link to='/'>MoviesLand</Link></span>

@@ -5,70 +5,38 @@ import { useState, useEffect } from 'react';
 import axiosInstance from '../axios config/axiosInstance';
 import { FaStar } from 'react-icons/fa';
 import { FcLike, FcLikePlaceholder } from 'react-icons/fc';
-import { useDispatch, useSelector } from 'react-redux';
-import { addFavMovies, addMovies } from '../store/actions/movies';
+import { useDispatch } from 'react-redux';
+import { addFavMovies } from '../store/actions/movies';
 
 
 export const Movies = () => {
     const dispatch = useDispatch();
-    const moviesState = useSelector((state) => state.movies);
-    const favMoviesState = useSelector((state) => state.favMovies);
-
+    const [films, setFilms] = useState([])
     function handleLikeBtn (film) {
-        let newList = moviesState;
+        let newList = films;
         if(film.liked) {
             film.liked = false
-            const movieIndex = newList.findIndex(item => item.id === film.id);
             console.log(film.liked);
             console.log("disliked");
-            let newFavList = favMoviesState.filter(favFilm => {
-                return favFilm.liked === true;
-            })
-            dispatch(addFavMovies(newFavList));
         }else{
             film.liked = true
             console.log(film.liked);
             console.log("liked");
-            dispatch(addFavMovies([...favMoviesState, film]));
         }
-        // setFilms([...newList]);
-       
-        dispatch(addMovies([...newList]));
-        console.log(favMoviesState);
+        setFilms([...newList]);
+        dispatch(addFavMovies([...newList]));
+        console.log(films);
     }
     let [query, setQuery]= useState(document.location.search.split('=')[1]);
     let [page, setPage] = useState(1)
+    
     useEffect(() => {
-        if(query){
             axiosInstance.get(`/search/movie?api_key=cd5cc4af3750ab19c216b0a7f80654a9&query=${query}`)
             .then((res) => {
-            // setFilms(res.data.results)
+            setFilms(res.data.results)
         }).catch((err) => {
             console.log(err);
         })
-        }else{
-            if(moviesState.length === 0){
-            axiosInstance.get(`/movie/popular?api_key=cd5cc4af3750ab19c216b0a7f80654a9&page=${page}`)
-            .then((res) => {
-            let movieList = res.data.results;
-            // movieList.forEach(list => {
-            //     list.liked = false;
-            // })
-            // console.log(movieList);
-            dispatch(addMovies(movieList))
-            // dispatch(setRequestState(true))
-            
-            // console.log(films);
-            // console.log(searchParams);
-        }).catch((err) => {
-            console.log(err);
-        })
-         }
-        }
-        
-            
-            // console.log(requestState)
-        
     }, [page])
 
         // useEffect(() => {
@@ -111,15 +79,10 @@ export const Movies = () => {
                 </div>
             </nav>
         </div>
-
-        <div className='flex justify-between bg-stone-500 '>
-        <h2 className='font-Roboto text-2xl pl-9 pt-8 font-semibold pb-10'>MoviesLand Films</h2>
-        <h4 className='animate-pulse-limited flex items-center mr-9'><FcLike className='mr-1 text-2xl'/>{favMoviesState.length}</h4>
-        </div>
-
-
+        <h2 className='font-Roboto text-2xl pl-9 pt-8 font-semibold pb-10 bg-stone-500'>MoviesLand Films</h2>
+        
         <div className='flex flex-wrap justify-center items-center pb-10 bg-stone-500'>
-            {moviesState.map((film) => {
+            {films.map((film) => {
                 return (
                     <div className='w-80 mb-3' key={film.id}>
                         <Link to={`/movies/${film.id}`}>
@@ -128,7 +91,7 @@ export const Movies = () => {
                         </Link>
                         <div className='flex justify-between bg-stone-400 mr-8 p-3'>
                         <h5 className='font-normal text-sm'>{film.title}</h5>
-                        <h6 className='font text-sm font-extrabold flex items-center'><button className='mr-1 text-xl' onClick={()=>{handleLikeBtn(film)}}>{film.liked?<FcLike/>:<FcLikePlaceholder/>}</button><FaStar className='text-amber-400 mr-1 text-xl'/>{film.vote_average}</h6>
+                        <h6 className='font text-sm font-extrabold flex items-center'><button className='mr-1' onClick={()=>{handleLikeBtn(film)}}>{film.liked?<FcLike/>:<FcLikePlaceholder/>}</button><FaStar className='text-amber-400 mr-1'/>{film.vote_average}</h6>
                         </div>
                     </div>
                 )

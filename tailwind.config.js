@@ -5,6 +5,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      animation: {
+        'spin-slow': 'spin 3s linear',
+        'pulse-limited': 'bounce 1s linear'
+      },
       fontFamily: {
         'Roboto': 'Roboto'
       }

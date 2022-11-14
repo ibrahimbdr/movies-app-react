@@ -5,3 +5,11 @@ export function addFavMovies(data){
         payload: data
     }
 }
+
+export function addMovies(data){
+    
+    return {
+        type: "SET_MOVIES",
+        payload: data
+    }
+}

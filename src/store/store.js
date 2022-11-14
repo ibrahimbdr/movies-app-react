@@ -1,8 +1,8 @@
 import { legacy_createStore as createStore } from "redux";
-import { combineReducers } from "./reducers/combineReducers";
+// import { combineReducers } from "./reducers/combineReducers";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { favMoviesReducer } from "./reducers/movies";
+import { moviesReducer } from "./reducers/movies";
 
-const store = createStore(favMoviesReducer, composeWithDevTools());
+const store = createStore(moviesReducer, composeWithDevTools());
 
 export default store;
