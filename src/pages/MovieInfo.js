@@ -86,5 +86,61 @@ export const MovieInfo = () => {
             </div>
 
     </div>
+//     <div class="min-h-screen grid place-items-center font-mono bg-gray-900">
+      
+//     <div class="bg-white rounded-md bg-gray-800 shadow-lg">
+//       <div class="md:flex px-4 leading-none max-w-4xl">
+//         <div class="flex-none ">
+//          <img
+//           src={`https://image.tmdb.org/t/p/w500/${filmInfo.poster_path}`} 
+//           alt="pic"
+//           class="h-72 w-56 rounded-md shadow-2xl transform -translate-y-4 border-4 border-gray-300 shadow-lg"
+//         />           
+//         </div>
+
+//         <div class="flex-col text-gray-300">
+ 
+//           <p class="pt-4 text-2xl font-bold">{filmInfo.title}</p>
+//           <hr class="hr-text" data-content=""/>
+//           <div class="text-md flex justify-between px-4 my-2">
+//             <span class="font-bold">{filmInfo.runtime} min | {filmGenres.name[0]}, {filmGenres.name[1]}, {filmGenres.name[1]}</span>
+//             <span class="font-bold"></span>
+//           </div>
+//           <p class="hidden md:block px-4 my-4 text-sm text-left">{filmO} </p>
+          
+//           <p class="flex text-md px-4 my-2">
+//             Rating: 9.0/10 
+//             <span class="font-bold px-2">|</span>
+//             Mood: Dark
+//           </p>
+          
+//           <div class="text-xs">
+//             <button type="button" class="border border-gray-400 text-gray-400 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-900 focus:outline-none focus:shadow-outline">TRAILER</button>
+            
+//             <button type="button" class="border border-gray-400 text-gray-400 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-900 focus:outline-none focus:shadow-outline">IMDB</button>
+            
+//             <button type="button" class="border border-gray-400 text-gray-400 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-900 focus:outline-none focus:shadow-outline">AMAZON</button>
+//           </div>
+
+        
+//         </div>
+//       </div>
+//       <div class="flex justify-between items-center px-4 mb-4 w-full">
+//         <div class="flex">
+//         <i class="material-icons mr-2 text-red-600">favorite_border</i>
+//         <i class="material-icons text-blue-600">remove_red_eye</i>
+//         </div>
+//         <div class="flex">
+//           <i class="material-icons ml-2 text-yellow-600">sentiment_very_satisfied</i>
+//           <i class="material-icons ml-2 text-yellow-600">sentiment_neutral</i>
+//           <i class="material-icons ml-2 text-yellow-600">sentiment_very_dissatisfied</i>
+//            <i class="material-icons ml-2 text-yellow-600">star_outline</i>
+//           <i class="material-icons ml-2 text-yellow-600">star_half</i>
+//           <i class="material-icons ml-2 text-yellow-600">star</i>           
+          
+//         </div>
+//       </div>          
+//     </div>
+//   </div>
   )
 }

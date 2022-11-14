@@ -5,6 +5,7 @@ import { useState, useEffect, useSearchParams } from 'react';
 import axiosInstance from '../axios config/axiosInstance';
 import { FaStar } from 'react-icons/fa';
 import { FcLike, FcDislike, FcLikePlaceholder } from 'react-icons/fc';
+import { RiDeleteBin5Fill } from 'react-icons/ri'
 import { useDispatch, useSelector } from 'react-redux';
 import { addFavMovies, addMovies } from '../store/actions/movies';
 
@@ -74,14 +75,14 @@ export const FavMovies = () => {
                         </Link>
                         <div className='flex justify-between bg-stone-400 mr-8 p-3'>
                         <h5 className='font-normal text-sm'>{film.title}</h5>
-                        <h6 className='font text-sm font-extrabold flex items-center'><button className='mr-1 text-xl' onClick={()=>{handleLikeBtn(film)}}>{film.liked?<FcDislike/>:<FcLikePlaceholder/>}</button><FaStar className='text-amber-400 mr-1 text-xl'/>{film.vote_average}</h6>
+                        <h6 className='font text-sm font-extrabold flex items-center'><button className='mr-1 text-xl' onClick={()=>{handleLikeBtn(film)}}>{film.liked?<RiDeleteBin5Fill className='text-red-600'/>:<FcLikePlaceholder/>}</button><FaStar className='text-amber-400 mr-1 text-xl'/>{film.vote_average}</h6>
                         </div>
                     </div>
                 )
             })}
         </div>
         
-
+            
 
     </div>
   )
